@@ -17,12 +17,10 @@ public class Program {
         gameBoard.initBoard(boardHeight, boardWidth);
         gameBoard.printBoard();
 
-        while (!rawInput.equals("start"))
-        {
+        while (!rawInput.equals("start")) {
             System.out.println("Select a board position to spawn the first cell on (x,y) or type ('start') to begin: ");
             rawInput = readInput.nextLine();
-            if (!rawInput.equals("start"))
-            {
+            if (!rawInput.equals("start")) {
                 posX = Integer.parseInt(rawInput.split(",", 2)[0]);
                 posY = Integer.parseInt(rawInput.split(",", 2)[1]);
                 gameBoard.spawnLife(posX, posY);
@@ -30,8 +28,7 @@ public class Program {
             }
         }
 
-        while (gameBoard.checkCells() > 0)
-        {
+        while (gameBoard.checkCells() > 0) {
             gameBoard.updateBoard();
             gameBoard.printBoard();
             try {
