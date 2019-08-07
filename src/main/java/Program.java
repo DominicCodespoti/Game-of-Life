@@ -29,7 +29,7 @@ public class Program {
         }
 
         while (gameBoard.checkCells() > 0) {
-            gameBoard.updateBoard();
+            gameBoard = gameBoard.updateBoard();
             gameBoard.printBoard();
             try {
                 Thread.sleep(2000);

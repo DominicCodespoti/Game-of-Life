@@ -1,33 +1,16 @@
 public class Cell {
-    enum cellState {
-        ALIVE,
-        DEAD
-    }
-
-    cellState Mortality = cellState.DEAD;
+    private boolean state = false;
     String posMarker = ".";
 
-    public void setCellState(boolean life)
-    {
-        if (life == true)
-        {
-            Mortality = cellState.ALIVE;
-        }
-        else
-        {
-            Mortality = cellState.DEAD;
-        }
+    public void makeCellAlive() {
+        state = true;
     }
 
-    public boolean isCellAlive()
-    {
-        if (Mortality == cellState.ALIVE)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+    public void makeCellDead() {
+        state = false;
+    }
+
+    public boolean isCellAlive() {
+        return state;
     }
 }

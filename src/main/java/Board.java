@@ -21,23 +21,21 @@ public class Board {
     }
 
     public void spawnLife(int posX, int posY) {
-        boardSpaces.get(posX).get(posY).Mortality = Cell.cellState.ALIVE;
+        boardSpaces.get(posX).get(posY).makeCellAlive();
         boardSpaces.get(posX).get(posY).posMarker = "O";
-        boardSpaces.get(posX).get(posY).setCellState(true);
     }
 
     public void killLife(int posX, int posY) {
-        boardSpaces.get(posX).get(posY).Mortality = Cell.cellState.DEAD;
+        boardSpaces.get(posX).get(posY).makeCellDead();
         boardSpaces.get(posX).get(posY).posMarker = ".";
-        boardSpaces.get(posX).get(posY).setCellState(false);
     }
 
-    public void updateBoard() {
+    public Board updateBoard() {
         Board gameBoard = new Board();
         gameBoard.initBoard(boardHeight, boardWidth);
         for (int i = 0; i < boardHeight; i++) {
             for (int j = 0; j < boardWidth; j++) {
-                if (boardSpaces.get(i).get(j).Mortality == Cell.cellState.ALIVE) {
+                if (boardSpaces.get(i).get(j).isCellAlive()) {
                     System.out.println(checkSurrounding(i, j) + " " + i + " " + j);
                     if (checkSurrounding(i, j) < 2) {
                         gameBoard.killLife(i, j);
@@ -49,14 +47,14 @@ public class Board {
                         gameBoard.spawnLife(i, j);
                     }
                 }
-                if (boardSpaces.get(i).get(j).Mortality == Cell.cellState.DEAD) {
+                if (!boardSpaces.get(i).get(j).isCellAlive()) {
                     if (checkSurrounding(i, j).equals(3)) {
                         gameBoard.spawnLife(i, j);
                     }
                 }
             }
         }
-        boardSpaces = gameBoard.boardSpaces;
+        return gameBoard;
     }
 
     void printBoard() {
